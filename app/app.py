@@ -8,7 +8,7 @@ access_token = [os.environ.get('IPINFO_TOKEN')]
 
 @app.route('/')
 def index():
-    visitor_details=locate_ip(get_client_ip())
+    visitor_details=locate_ip(remove_port(get_client_ip()))
     return render_template('index.html', visitor_details=visitor_details)
 
 def get_client_ip():
@@ -16,7 +16,14 @@ def get_client_ip():
         client_ip = request.environ['REMOTE_ADDR']
     else:
         client_ip = request.environ['HTTP_X_FORWARDED_FOR']
+    
     return client_ip
+
+def remove_port(ip_address_with_port):
+    parts = ip_address_with_port.split(':')
+    ip_address = parts[0]
+    return ip_address
+
 
 def locate_ip(client_ip):
     handler = ipinfo.getHandler(access_token)
