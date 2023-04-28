@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>{% block title %}{% endblock %} - DON'T FORGET TO ADD A TITLE </title>
+
+    {% endblock %}
+  </head>
+  <body>
+    <div id="content">{% block content %} {% endblock %}</div>
+    <div id="footer" style="font-size: 8px;">
+        <p>Favicon made by Freepik from www.flaticon.com</p>
+      {% block footer %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
