@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-access_token = [os.environ.get('IPINFO_TOKEN')]
+access_token = os.environ['IPINFO_TOKEN']
 
 @app.route('/')
 def index():
