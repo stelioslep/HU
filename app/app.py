@@ -2,9 +2,18 @@ from flask import Flask, render_template, request
 import ipinfo
 import os
 
+# check which are necessary
+from pyowm import OWM
+from pyowm.utils import config
+from pyowm.utils import timestamps
+
+
 app = Flask(__name__)
 
 access_token = os.environ['IPINFO_TOKEN']
+
+owm = OWM(os.environ['OWM_TOKEN'])
+mgr = owm.weather_manager()
 
 @app.route('/')
 def index():
@@ -21,7 +30,9 @@ def index():
         latitude = 'Unknown latitude'
         longitude = 'Unknown longitude'
     
-    return render_template('index.html', city=city, region=region, country=country, countryname=countryname, latitude=latitude, longitude=longitude)
+    weather_status, humidity, temp_info = weather_search(region, country)
+    
+    return render_template('index.html', city=city, region=region, country=country, countryname=countryname, latitude=latitude, longitude=longitude, weather_status=weather_status, humidity=humidity, temp_info=temp_info)
 
 def get_client_ip():
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
@@ -55,6 +66,24 @@ def location_detail_validator(detail_dict):
         return False
     else:
         return True
+
+# fails locally, works on azure. Add error handling
+
+def weather_search(region, country):
+    observation = mgr.weather_at_place(f'{country},{region}')
+    w = observation.weather
+
+    weather_status = w.detailed_status         # 'clouds'
+    wind_dict = w.wind()                  # {'speed': 4.6, 'deg': 330}
+    humidity = w.humidity                # 87
+    temperature = w.temperature('celsius')  # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
+    rain = w.rain                    # {}
+    #w.heat_index              # None
+    #w.clouds                  # 75
+    humidity = f"Humidity: {humidity}"
+    temp_info = f"Current temperature: {temperature['temp']}, Max temperature: {temperature['temp_max']}, Min temperature: {temperature['temp_min']}"
+
+    return weather_status, humidity, temp_info
 
 if __name__ == '__main__':
     app.run(debug=True)
