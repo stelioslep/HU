@@ -70,7 +70,7 @@ def location_detail_validator(detail_dict):
 # fails locally, works on azure. Add error handling
 
 def weather_search(region, country):
-    observation = mgr.weather_at_place(f'{country},{region}')
+    observation = mgr.weather_at_place(f'{region},{country}')
     w = observation.weather
 
     weather_status = w.detailed_status         # 'clouds'
