@@ -1,11 +1,48 @@
 {% extends "base.html" %}
-{% block title %}Index{% endblock %}
+
+{% block title %}{{location}}{% endblock %}
+
+
 {% block head %}
-  {{ super() }}
-  <style></style>
+{{ super() }}
 {% endblock %}
+
+{% block header %}
+<div id = "header">
+  <span class="small-text">Here is the weather for </span>
+  <span class="large-text">{{location}}</span>
+  <span class="small-text">,{{country}}.</span>
+</div>
+{% endblock %}
+
 {% block content %}
-  <p>
-    {{city}}, {{region}}, {{country}}, {{countryname}}, {{latitude}}, {{longitude}}, {{weather_status}}, {{humidity}}, {{temp_info}}
-  </p>
+<div class="even-outer-wrapper"> 
+  <div class="weather-text">You can expect {{weather_status}}.</div>
+
+  
+    <div class="outer-wrapper">
+    
+      <div class="outer-container">
+        <div class="inner-container">
+          <div class="main-element">{{now_temperature}}°C</div>
+          <div class="sub-elements">
+            <div class="sub-element-left">{{min_temperature}}°C</div>
+            <div class="sub-element-right">{{max_temperature}}°C</div>
+          </div>
+            
+        </div>
+      </div> 
+
+      
+      <div class="outer-container">
+        <div class="inner-container">
+          <div class="main-element">{{humidity}}</div>
+            <div class="sub-elements">
+              <div class="sub-element-right">Humidity</div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+
 {% endblock %}

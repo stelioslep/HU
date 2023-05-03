@@ -4,16 +4,51 @@
     {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>{% block title %}{% endblock %} - DON'T FORGET TO ADD A TITLE </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - LepWeather </title>
 
     {% endblock %}
   </head>
+  
   <body>
-    <div id="content">{% block content %} {% endblock %}</div>
+    
+    <div class="sky">
+      <div id="sun" class="sun"></div>
+      <div id="cloud1" class="cloud"></div>
+      <div id="cloud2" class="cloud"></div>
+      <div id="cloud3" class="cloud"></div>
+      <div id="cloud4" class="cloud"></div>
+      <div id="cloud5" class="cloud"></div>
+      
+    </div>
+    
+    {% block header %}
+    {% endblock %}
+
+    <div id="content">
+      {% block content %} {% endblock %}
+    </div>
+
+    {% block footer %}
     <div id="footer" style="font-size: 8px;">
         <p>Favicon made by Freepik from www.flaticon.com</p>
-      {% block footer %}
-      {% endblock %}
     </div>
+    {% endblock %}
+
+    <div id="compass-container">
+      <div class="compass">
+        <div class="compass-flower"></div>
+        <div class="compass-pointer-wrapper">
+          <div class="compass-pointer"></div>
+          <div class="compass-pointer-shadow"></div>
+        </div>
+        <div class="compass-center"></div>
+      </div>
+    </div>
+
+    
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
   </body>
 </html>
