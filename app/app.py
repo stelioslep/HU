@@ -22,25 +22,25 @@ def index():
     else:
         city = 'Munich'
         region = 'Bavaria'
-        country = 'Germany'
-        countryname = 'DE'
+        country = 'DE'
+        countryname = 'Germany'
         latitude = 'Unknown latitude'
         longitude = 'Unknown longitude'
     
     #add try block here, check for city, country first then region, country
     
     try:
-        weather_status, humidity, now_temperature, max_temperature, min_temperature  = weather_search(city, country)
+        weather_status, humidity, now_temperature, max_temperature, min_temperature  = weather_search(city, countryname)
         location = city
     except:
-        weather_status, humidity, now_temperature, max_temperature, min_temperature = weather_search(region, country)
+        weather_status, humidity, now_temperature, max_temperature, min_temperature = weather_search(region, countryname)
         location = region
 
     now_temperature = round(now_temperature)
     max_temperature = round(max_temperature)
     min_temperature = round(min_temperature)
     
-    return render_template('index.html', location=location, country=country,  weather_status=weather_status, humidity=humidity, now_temperature=now_temperature, max_temperature=max_temperature, min_temperature=min_temperature, latitude=latitude, longitude=longitude)
+    return render_template('index.html', location=location, country=countryname,  weather_status=weather_status, humidity=humidity, now_temperature=now_temperature, max_temperature=max_temperature, min_temperature=min_temperature, latitude=latitude, longitude=longitude)
 
 def get_client_ip():
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
