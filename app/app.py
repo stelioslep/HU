@@ -1,14 +1,11 @@
 from flask import Flask, render_template, request
 import ipinfo
 import os
-
-# check which are necessary
 from pyowm import OWM
 
 app = Flask(__name__)
 
 access_token = os.environ['IPINFO_TOKEN']
-
 owm = OWM(os.environ['OWM_TOKEN'])
 mgr = owm.weather_manager()
 
@@ -17,6 +14,8 @@ def index():
     
     visitor_details=locate_ip(remove_port(get_client_ip()))
 
+    # See location_detail_validator() for more details.
+    
     if location_detail_validator(visitor_details):
         city, region, country, countryname, latitude, longitude = location_detail_extractor(visitor_details)
     else:
@@ -27,7 +26,7 @@ def index():
         latitude = 'Unknown latitude'
         longitude = 'Unknown longitude'
     
-    #add try block here, check for city, country first then region, country
+    # Check if we can find the weather for the city. If not, try the region.
     
     try:
         weather_status, humidity, now_temperature, max_temperature, min_temperature  = weather_search(city, countryname)
@@ -43,6 +42,8 @@ def index():
     return render_template('index.html', location=location, country=countryname,  weather_status=weather_status, humidity=humidity, now_temperature=now_temperature, max_temperature=max_temperature, min_temperature=min_temperature, latitude=latitude, longitude=longitude)
 
 def get_client_ip():
+    # Get the client ip address even if the app is behind a proxy
+    
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
         client_ip = request.environ['REMOTE_ADDR']
     else:
@@ -51,6 +52,8 @@ def get_client_ip():
     return client_ip
 
 def remove_port(ip_address_with_port):
+    # get_client_ip() returns the ip address with the port number. We need to remove the port number to use the ipinfo library
+    
     parts = ip_address_with_port.split(':')
     ip_address = parts[0]
     return ip_address
@@ -70,6 +73,8 @@ def location_detail_extractor(detail_dict):
     return city, region, country, countryname, latitude, longitude
 
 def location_detail_validator(detail_dict):
+    # Local & other invalid ip addresses return a 'bogon' key in the dictionary. If the location is invalid, we will use Munich as the default location.
+    
     if 'bogon' in detail_dict:
         return False
     else:
@@ -94,4 +99,4 @@ def weather_search(location, country):
     return weather_status, humidity, now_temperature, max_temperature, min_temperature
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
