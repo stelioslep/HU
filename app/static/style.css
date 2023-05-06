@@ -30,7 +30,6 @@ body {
     white-space: nowrap;
     overflow-y: hidden;
     overflow-x: auto; 
-    text-overflow: ellipsis; 
 }
 .small-text {
   font-size: 64px;
