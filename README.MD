@@ -1,6 +1,6 @@
 # Flask Weather App
 
-This is a simple Flask web application that provides weather information for the user's location. The app uses the OpenWeatherMap API to fetch the current weather data and display it to the user, as well as the IPInfo API to locate users based on their public IP. User data is intentionally not stored anywhere.
+This is a simple Flask web application that provides weather information for the user's location. The app uses the OpenWeatherMap API to fetch the current weather data and display it to the user, as well as the IPInfo API to locate users based on their public IP.
 
 ## Installation
 
@@ -8,7 +8,7 @@ There is no need to do this unless you intend to modify this project in order to
 The version found there is a deployed version of this repository in an Azure Web App. 
 
 1. Clone the repository to your local machine.
-2. Install the required packages by running `pip install -r requirements.txt`.
+2. Install the required packages by running `pip install -r requirements.txt`. Probably best if this is done in a virtual environment.
 3. Replace the `OWM_TOKEN` and `IPINFO_TOKEN` values with your own API keys for OpenWeatherMap and IPInfo respectively. The app will work under the free pricing tiers of both.
 
 ## Usage
@@ -42,7 +42,7 @@ The app uses the following packages:
 - All packages the above depend on, as shown on the project's requirements.txt
 
 The weather data is provided by the OpenWeatherMap API.
-The user is located via the IPInfo API.
+The user is located via the IPInfo API, based on their IP.
 
 ## License
 

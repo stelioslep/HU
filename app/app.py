@@ -42,6 +42,7 @@ def index():
     return render_template('index.html', location=location, country=countryname,  weather_status=weather_status, humidity=humidity, now_temperature=now_temperature, max_temperature=max_temperature, min_temperature=min_temperature, latitude=latitude, longitude=longitude)
 
 def get_client_ip():
+    
     # Get the client ip address even if the app is behind a proxy
     
     if request.environ.get('HTTP_X_FORWARDED_FOR') is None:
@@ -52,6 +53,7 @@ def get_client_ip():
     return client_ip
 
 def remove_port(ip_address_with_port):
+    
     # get_client_ip() returns the ip address with the port number. We need to remove the port number to use the ipinfo library
     
     parts = ip_address_with_port.split(':')
@@ -64,6 +66,9 @@ def locate_ip(client_ip):
     return details.all
 
 def location_detail_extractor(detail_dict):
+    
+    # This only exists because I don't want to type detail_dict['city'] every time I need the city name. 
+
     city = detail_dict['city']
     region = detail_dict['region']
     country = detail_dict['country']
@@ -73,6 +78,7 @@ def location_detail_extractor(detail_dict):
     return city, region, country, countryname, latitude, longitude
 
 def location_detail_validator(detail_dict):
+    
     # Local & other invalid ip addresses return a 'bogon' key in the dictionary. If the location is invalid, we will use Munich as the default location.
     
     if 'bogon' in detail_dict:

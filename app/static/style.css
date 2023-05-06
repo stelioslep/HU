@@ -25,11 +25,12 @@ body {
     height: 128px;
     color: #f0f3f5;
     text-align: center;
-    text-shadow: 2px 2px 5px #000000;
+    text-shadow: 7px 7px 7px #000000;
     line-height: 128px;
-    white-space: nowrap; /* prevents text from wrapping */
-    overflow: hidden; /* hides text that overflows its container */
-    text-overflow: ellipsis; /* adds ellipsis (...) to indicate truncated text */
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto; 
+    text-overflow: ellipsis; 
 }
 .small-text {
   font-size: 64px;
@@ -85,7 +86,7 @@ body {
 
 .outer-container {
   background-color: #5f5f5f;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   border-color: rgb(29, 29, 29);
   border-style: solid;
