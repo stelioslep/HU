@@ -26,7 +26,8 @@ additional IPINfo API calls during testing which are not desired. To get informa
 
 1. Simply visit `https://lepweather.com` from a desktop web browser of choice. 
 
-As a lot of the styling of the website has been an AI assisted blend of borrowed code, just there to make the information the APIs give prettier, it has **not** been optimised.
+As a lot of the styling of the website is a based on a blend of [borrowed](https://codepen.io/antoniasymeonidou/pen/BawKMqg "Thank you for the beautiful clouds!") or simply extremely basic code, just there to make the information the APIs give prettier, it has **not** been optimised.
+
 There may be issues when the page is visited from devices with a low screen resolution, as well as most mobile aspect ratios. As of right now, further refinements on the site
 may happen when I feel like it, but are not planned or a priority.
 
@@ -43,6 +44,13 @@ The app uses the following packages:
 
 The weather data is provided by the OpenWeatherMap API.
 The user is located via the IPInfo API, based on their IP.
+
+## Skills showcased
+
+This project intends to demonstrate my skills in python development, API consumption, as well as some basic user interface design. I used Flask to create a dynamic web app that
+displays real-time weather data from the OpenWeatherMap API, while also locating the user with the IPInfo API. I learned how to make HTTP requests, parse JSON responses, and
+handle errors. Additionally, I was introduced to designing a basic interface using HTML, CSS, and JavaScript. Once everything was set up, I hosted my app on Azure, making it
+available for anyone on the internet to view.
 
 ## License
 
